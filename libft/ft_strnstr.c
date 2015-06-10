@@ -6,7 +6,7 @@
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:32:48 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/09 19:37:27 by nbeydon          ###   ########.fr       */
+/*   Updated: 2015/06/10 17:49:40 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ char				*ft_strnstr(const char *str, const char *find, size_t slen)
 
 	i = 0;
 	if (*find == '\0')
-		return ((char *) str);
+		return ((char *)str);
 	while (str[i] != '\0' && i < slen)
 	{
 		if (ft_strncmp(str + i, find, ft_strlen(find)) == 0
 				&& ft_strlen(find) + i <= slen)
-			return ((char *) (str + i));
+			return ((char *)(str + i));
 		i++;
 	}
 	return (NULL);
