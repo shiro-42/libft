@@ -6,11 +6,12 @@
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:15:12 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/09 19:32:01 by nbeydon          ###   ########.fr       */
+/*   Updated: 2015/06/10 17:20:17 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include "./libft.h"
 
 int		ft_isgraph(int c)
 {

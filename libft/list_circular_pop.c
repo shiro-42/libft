@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   list_circular_pop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 14:34:04 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/10 17:20:24 by nbeydon          ###   ########.fr       */
+/*   Created: 2015/06/10 17:05:13 by nbeydon           #+#    #+#             */
+/*   Updated: 2015/06/10 17:06:25 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int		ft_isspace(int c)
+t_node					*list_circular_pop(t_circle *self)
 {
-	return (c == ' ' || c == '\f' || c == '\n' ||
-	c == '\r' || c == '\t' || c == '\v');
+	t_node				*target;
+
+	if (self->origin->left != self->origin)
+	{
+		target = self->origin->left;
+		self->origin->left->left->right = self->origin;
+		self->origin->left = self->origin->left->left;
+	}
+	else
+	{
+		target = self->origin;
+		self->origin = NULL;
+	}
+	self->length -= 1;
+	return (target);
 }

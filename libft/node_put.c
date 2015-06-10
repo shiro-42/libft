@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   node_put.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 14:34:04 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/10 17:20:24 by nbeydon          ###   ########.fr       */
+/*   Created: 2015/06/10 17:08:21 by nbeydon           #+#    #+#             */
+/*   Updated: 2015/06/10 17:08:31 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int		ft_isspace(int c)
+void					node_put(t_node *self)
 {
-	return (c == ' ' || c == '\f' || c == '\n' ||
-	c == '\r' || c == '\t' || c == '\v');
+	if (self->type == INT)
+		ft_putnbr(*(int*)self->data);
+	else if (self->type == CHAR)
+		ft_putchar((char)self->data);
+	else if (self->type == STRING)
+		ft_putstr((char*)self->data);
 }

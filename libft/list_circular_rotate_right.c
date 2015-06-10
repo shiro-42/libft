@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   list_circular_rotate_right.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 14:34:04 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/10 17:20:24 by nbeydon          ###   ########.fr       */
+/*   Created: 2015/06/10 17:05:13 by nbeydon           #+#    #+#             */
+/*   Updated: 2015/06/10 17:07:52 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int		ft_isspace(int c)
+void					list_circular_rotate_right(t_circle *self)
 {
-	return (c == ' ' || c == '\f' || c == '\n' ||
-	c == '\r' || c == '\t' || c == '\v');
+	if (self->origin->right != NULL)
+		self->origin = self->origin->right;
 }

@@ -6,21 +6,44 @@
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/25 18:49:42 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/09 19:38:11 by nbeydon          ###   ########.fr       */
+/*   Updated: 2015/06/10 17:17:35 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define FALSE 0
-# define TRUE !FALSE
-# define ABS(X) ((X) < 0 ? - (X) : (X))
+/*
+*********************** Includes ***********************************************
+*/
 # include <string.h>
 # include <stdio.h>
 # include <ctype.h>
 # include <unistd.h>
 # include <stddef.h>
 # include <stdlib.h>
+
+# define FALSE 0
+# define TRUE !FALSE
+
+# define DEBUG			0
+
+# define INT			0
+# define CHAR			1
+# define STRING			2
+# define ARRAY_INT		3
+
+# define FIRST			0
+# define LAST			-1
+
+# define ABS(X) ((X) < 0 ? - (X) : (X))
+# define H1(...) FIRST_HELPER(__VA_ARGS__)
+# define H2(...) SECOND_HELPER(__VA_ARGS__)
+# define FIRST_HELPER(first, ...) (first ? first : NULL)
+# define SECOND_HELPER(first, second, ...) (second ? second : NULL)
+# define M(...) METHOD_ARGS_HELPER(__VA_ARGS__)
+# define METHOD_ARGS_HELPER(first, second, ...) __VA_ARGS__
+# define METHOD_STATIC(...) (H2(__VA_ARGS__)(H1(__VA_ARGS__)))
+# define METHOD(...) (H2(__VA_ARGS__) (H1(__VA_ARGS__), M(__VA_ARGS__)))
 
 typedef int			t_bool;
 
@@ -31,6 +54,52 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct			s_int
+{
+	char				name;
+	int					len;
+	int					*array;
+}						t_int;
+
+typedef struct			s_node
+{
+	void				*data;
+	int					type;
+	struct s_node		*left;
+	struct s_node		*right;
+	void				(*put)(struct s_node *);
+}						t_node;
+
+typedef struct			s_circle
+{
+	struct s_node		*origin;
+	int					length;
+	void				(*push_front)(struct s_circle *, t_node *);
+	void				(*push_back)(struct s_circle *, t_node *);
+	void				(*insert)(struct s_circle *, int, t_node *);
+	void				(*rotate_right)(struct s_circle *);
+	void				(*rotate_left)(struct s_circle *);
+	struct s_node		*(*shift)(struct s_circle *);
+	struct s_node		*(*pop)(struct s_circle *);
+	void				(*delete_index)(struct s_circle *, int);
+	void				(*put)(struct s_circle *);
+	void				(*put_reverse)(struct s_circle *);
+	void				(*delete)(struct s_circle *, int);
+	int					(*some)(struct s_circle *, int (*f)(t_node *));
+	struct s_iterator	*(*keys)(struct s_circle *);
+}						t_circle;
+
+typedef struct			s_iterator
+{
+	int					index;
+	int					max;
+	t_bool				done;
+	void				(*next)(struct s_iterator *);
+}						t_iterator;
+
+/*
+*********************** Libft *************************************************
+*/
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -98,5 +167,58 @@ int					ft_isspace(int c);
 int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_isxdigit(int c);
+
+/*
+*********************** Functional ************************************
+*/
+void				end_line(void);
+int					*new_int_ptr(int data);
+int					count_bits(int num);
+
+/*
+*********************** Table Int ************************************
+*/
+void				ft_shift_right(t_int *data);
+void				ft_shift(t_int *data);
+
+/*
+*********************** Foreach **************************************
+*/
+void				foreach_char(char *string, char (*f)(char));
+void				array_strings_foreach(char **args, char *(*f)(char *));
+
+/*
+*********************** Map ******************************************
+*/
+char				*string_map(char *string, char (*f)(char));
+
+/*
+*********************** List Circular ********************************
+*/
+t_circle			*new_list_circular(void *data, int type);
+void				list_circular_push_front(t_circle *self, t_node *node);
+void				list_circular_push_back(t_circle *self, t_node *node);
+void				list_circular_rotate_right(t_circle *self);
+void				list_circular_rotate_left(t_circle *self);
+t_node				*list_circular_shift(t_circle *self);
+t_node				*list_circular_pop(t_circle *self);
+void				list_circular_put(t_circle *self);
+void				list_circular_put_reverse(t_circle *self);
+void				list_circular_insert(t_circle *self, int d, t_node *n);
+void				list_circular_delete(t_circle *self, int index);
+t_bool				list_circular_some(t_circle *self, t_bool (*f)(t_node *));
+void				iterator_next(t_iterator *self);
+t_iterator			*list_circular_get_keys(t_circle *self);
+
+/*
+*********************** Node ****************************************
+*/
+t_node				*new_node(void *data, int type);
+void				node_put(t_node *self);
+
+/*
+*********************** Error ***************************************
+*/
+void				throw_error(char *error);
 
 #endif

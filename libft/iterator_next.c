@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   iterator_next.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 14:34:04 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/10 17:20:24 by nbeydon          ###   ########.fr       */
+/*   Created: 2015/06/10 17:09:11 by nbeydon           #+#    #+#             */
+/*   Updated: 2015/06/10 17:10:32 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int		ft_isspace(int c)
+void		iterator_next(t_iterator *self)
 {
-	return (c == ' ' || c == '\f' || c == '\n' ||
-	c == '\r' || c == '\t' || c == '\v');
+	self->index += 1;
+	self->done = self->index == self->max;
 }

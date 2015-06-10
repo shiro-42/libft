@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   new_int_ptr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbeydon <nbeydon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 14:34:04 by nbeydon           #+#    #+#             */
-/*   Updated: 2015/06/10 17:20:24 by nbeydon          ###   ########.fr       */
+/*   Created: 2015/06/10 16:58:47 by nbeydon           #+#    #+#             */
+/*   Updated: 2015/06/10 16:59:26 by nbeydon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-int		ft_isspace(int c)
+int						*new_int_ptr(int data)
 {
-	return (c == ' ' || c == '\f' || c == '\n' ||
-	c == '\r' || c == '\t' || c == '\v');
+	int					*new;
+
+	if ((new = (int *)malloc(sizeof(int))) == NULL)
+		throw_error("allocation error");
+	*new = data;
+	return (new);
 }
